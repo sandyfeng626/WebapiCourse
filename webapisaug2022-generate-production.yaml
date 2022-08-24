@@ -1,0 +1,56 @@
+kind: Deployment
+apiVersion: apps/v1
+metadata:
+  name: courses-api
+  labels:
+    app.kubernetes.io/name: 'courses-api'
+    app.kubernetes.io/part-of: 'webapisaug2022'
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: courses-api
+  template:
+    metadata:
+      labels:
+        app.kubernetes.io/name: 'courses-api'
+        app.kubernetes.io/part-of: 'webapisaug2022'
+    spec:
+      containers:
+      - name: courses-api
+        image: courses-api:1.0.0
+        imagePullPolicy: Always
+        env:
+        - name: DOTNET_LOGGING__CONSOLE__DISABLECOLORS
+          value: 'true'
+        - name: ASPNETCORE_URLS
+          value: 'http://*'
+        - name: PORT
+          value: '80'
+        - name: SERVICE__COURSES-API__PROTOCOL
+          value: 'http'
+        - name: SERVICE__COURSES-API__PORT
+          value: '80'
+        - name: SERVICE__COURSES-API__HOST
+          value: 'courses-api'
+        ports:
+        - containerPort: 80
+...
+---
+kind: Service
+apiVersion: v1
+metadata:
+  name: courses-api
+  labels:
+    app.kubernetes.io/name: 'courses-api'
+    app.kubernetes.io/part-of: 'webapisaug2022'
+spec:
+  selector:
+    app.kubernetes.io/name: courses-api
+  type: ClusterIP
+  ports:
+  - name: http
+    protocol: TCP
+    port: 80
+    targetPort: 80
+...

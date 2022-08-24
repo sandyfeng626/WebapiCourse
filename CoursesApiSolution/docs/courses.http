@@ -1,0 +1,41 @@
+### Get All Courses
+
+GET http://localhost:9090/courses HTTP/1.1
+Accept: application/json
+
+
+### Get a Course
+
+GET http://localhost:9090/courses/63053152692793d8fae1f883 HTTP/1.1
+
+### Add a Course (Version 1)
+POST http://localhost:9090/online-courses HTTP/1.1
+Content-Type: application/json
+Accept: application/json
+
+{
+    "title": "Design APIs more Better",
+    "numberOfHours": 55.5
+
+}
+
+
+### Add an On Prem Course (Version 1)
+POST http://localhost:9090/onprem-courses HTTP/1.1
+Content-Type: application/json
+Accept: application/json
+
+{
+    "title": "Disco 101",
+    "numberOfHours": 3.5
+
+}
+
+
+### Removing a Course
+DELETE http://localhost:9090/courses/63063d8b67237be638664235 HTTP/1.1
+
+
+### That course should be gone
+
+GET http://localhost:9090/courses/63063d8b67237be638664235 HTTP/1.1

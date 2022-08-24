@@ -1,0 +1,7 @@
+
+services:
+
+
+- name: courses-api
+  project: CoursesApiSolution\CoursesApi\CoursesApi.csproj
+

@@ -1,0 +1,27 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: hr-api
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: hr-api
+  template:
+    metadata:
+      labels:
+        app: hr-api
+    spec:
+      containers:
+      - name: hr-api
+        image: hr-api:v0.1
+        resources:
+          requests:
+            memory: "120Mi"
+            cpu: "250m"
+
+          limits:
+            memory: "1000Mi"
+            cpu: "16000m"
+        ports:
+        - containerPort: 80
